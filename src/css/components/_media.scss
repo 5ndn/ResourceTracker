@@ -1,0 +1,22 @@
+/*@custom-media --sm-viewport (min-width:320px) and (max-width:640px);
+@custom-media --md-viewport (min-width:640px) and (max-width:960px);
+@custom-media --lg-viewport (min-width:960px);*/
+
+/*
+ Breakpoints
+ ========================================================================== */
+@custom-media --mobile (width <= 580px);
+@custom-media --desktop (width <= 1024px);
+@custom-media --mid (width <= 900px);
+@custom-media --wide (width <= 1200px);
+@custom-media --widest (width <= 1500px);
+@custom-media --maxWidth (width <= 1820px);
+
+/* 
+   Vertical
+   ========================================================================== */
+
+@custom-media --small (height <= 800px);
+@custom-media --medium (height <= 900px);
+@custom-media --tall (height <= 1200px);
+@custom-media --tallest (width <= 1920px) and (height <= 1100px);

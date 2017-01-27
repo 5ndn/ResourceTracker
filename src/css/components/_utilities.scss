@@ -1,0 +1,48 @@
+
+/* 
+   Utility Classes
+   ========================================================================== */
+
+// Floats
+// --------------------------
+.u-clear {
+    clear: both;
+}
+
+.u-pullLeft {
+    float: left;
+}
+
+.u-pullRight {
+    float: right;
+}
+
+// Clearfix
+// --------------------------
+.u-clearfix:before,
+.u-clearfix:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+}
+
+.u-clearfix:after {
+    clear: both;
+}
+
+.u-clearfix {
+    zoom: 1;
+}
+
+// Visually Hidden
+// ---------------------------
+.u-visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}

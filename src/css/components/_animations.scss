@@ -1,0 +1,58 @@
+@keyframes fadeIn {
+	0% { 
+		opacity: 0;
+	 }
+	25% { }
+	50% { }
+	75% { }
+	100% { opacity: 1 }
+}
+
+@keyframes fadeInUp {
+	0% { 
+		opacity: 0;
+		transform: translateY(40px);
+	 }
+	25% { }
+	50% { }
+	75% { }
+	100% { 
+		opacity: 1;
+		transform: translateY(0); 
+	}
+}
+
+@keyframes fadeInLoginContainer {
+	0% { 
+		opacity: 0;
+	}
+	25% { }
+	50% { 
+		box-shadow: 0 0 0px color($color-black a(0%));
+		opacity: 1;
+	}
+	75% { 
+		
+	}
+	100% { 
+		box-shadow: 0 0 16px color($color-black a(10%));
+		transform: translate(-50%, -50%); 
+	}
+}
+
+@keyframes fadeOutLoginContainer {
+	0% { 
+		box-shadow: 0 0 16px color($color-black a(10%));
+		opacity: 1;
+	}
+	25% { }
+	50% { 
+		box-shadow: 0 0 0px color($color-black a(0%));
+	}
+	75% { 
+		
+	}
+	100% { 
+		opacity: 0;
+	}
+}

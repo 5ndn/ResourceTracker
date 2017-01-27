@@ -1,0 +1,192 @@
+// reset default ul/ol list styles
+@define-mixin list-reset {
+	list-style: none outside;
+	margin: 0;
+	padding: 0;
+
+	&:after {
+		content:"";
+		display:table;
+		clear:both;
+	}
+}
+
+@define-mixin size $width, $height {
+	width: $(width);
+	height: $(height);
+}
+
+@define-mixin activeDay $daySlug {
+  .fd-resourceTable-date:first-child $daySlug {
+    background: $color-white;
+    border-radius: 10px 10px 0 0;
+    color: $color-black;
+    @mixin font-sansN6;
+  }
+
+  // Due to padding, borders, etc, offsets need to be tweaked a bit
+  .fd-resourceTable-week:nth-child(2):before {
+    @if $daySlug == .Mon {
+      left: 15px;
+    }
+    @if $daySlug == .Tue {
+      left: calc(20% + 9px);
+    }
+    @if $daySlug == .Wed {
+      left: calc(40% + 3px);
+    }
+    @if $daySlug == .Thu {
+      left: calc(60% - 3px);
+    }
+    @if $daySlug == .Fri {
+      left: calc(80% - 9px);
+    }
+  }
+  
+  // Day's borders need to be hidden in specific ways for active styles
+  @if $daySlug == .Mon {
+    .fd-resourceTable-date:first-child .Tue:before { display: none; }
+  }
+  @if $daySlug == .Tue {
+    .fd-resourceTable-date:first-child .Tue:before,
+    .fd-resourceTable-date:first-child .Wed:before { display: none; }
+  }
+  @if $daySlug == .Wed {
+    .fd-resourceTable-date:first-child .Wed:before,
+    .fd-resourceTable-date:first-child .Thu:before { display: none; }
+  }
+  @if $daySlug == .Thu {
+    .fd-resourceTable-date:first-child .Thu:before,
+    .fd-resourceTable-date:first-child .Fri:before { display: none; }
+  }
+  @if $daySlug == .Fri {
+    .fd-resourceTable-date:first-child .Fri:before { display: none; }
+  }
+}
+@define-mixin hideEndWeeks $num: 0 {
+  @if $num == 1 {
+    width: $table-col-width--1-5;
+    &--6 { display: none; }
+  }
+  @if $num == 2 {
+    width: $table-col-width--1-4;
+    &--6, &--5 { display: none; }
+  }
+  @if $num == 3 {
+    width: $table-col-width--1-3;
+    &--6, &--5, &--4 { display: none; }
+  }
+  @if $num == 4 {
+    width: $table-col-width--1-2;
+    &--6, &--5, &--4, &--3 { display: none; }
+  }
+  @if $num == 5 {
+    width: $table-col-width--1-1;
+    &--6, &--5, &--4, &--3, &--2 { display: none; }
+  }
+}
+
+/*
+  Triangles follow same nomenclature as: http://apps.eky.hk/css-triangle-generator/;
+========================================================================== */
+@define-mixin triangle $direction: left, $color: $color-black, $width: 6px, $height: 12px {
+  @mixin size 0,0;
+  border-style: solid;
+
+  @if $direction == bottom {
+    $width-computed: resolve($(width) / 2);
+    border-width: $(height) $width-computed 0 $width-computed;
+    border-color: $(color) transparent transparent transparent;
+  }
+  @if $direction == bottom-right {
+    border-width: 0 0 $(height) $(width);
+    border-color: transparent transparent $(color) transparent;
+  }
+  @if $direction == bottom-left {
+    border-width: $(height) 0 0 $(width);
+    border-color: transparent transparent transparent $(color);
+  }
+  @if $(direction) == left {
+    $height-computed: resolve($(height) / 2);
+    border-width: $height-computed $(width) $height-computed 0;
+    border-color: transparent $(color) transparent transparent;
+  }
+  @if $direction == left-inverse {
+    $height-computed: resolve($(height) / 2);
+    border-width: $height-computed $(width) $height-computed 0;
+    border-color: $(color) transparent $(color) transparent;
+  }
+  @if $direction == right {
+    $height-computed: resolve($(height) / 2);
+    border-width: $height-computed 0 $height-computed $(width);
+    border-color: transparent transparent transparent $(color);
+  }
+  @if $direction == right-inverse {
+    $height-computed: resolve($(height) / 2);
+    border-width: $height-computed 0 $height-computed $(width);
+    border-color: $(color) transparent $(color) transparent;
+  }
+  @if $direction == top {
+    $height-computed: resolve($(height) / 2);
+    border-width: 0 $height-computed $(width) $height-computed;
+    border-color: transparent transparent $(color) transparent;
+  }
+  @if $direction == top-left {
+    border-width: $(height) $(width) 0 0;
+    border-color: $(color) transparent transparent transparent;
+  }
+  @if $direction == top-right {
+    border-width: $(height) 0 0 $(width);
+    border-color: $(color) transparent transparent transparent;
+  }
+  @if $direction == bottom-inverse {
+    $height-computed: resolve($(height) / 2);
+    border-width: 0 $height-computed $(width) $height-computed;
+    border-color: transparent $(color) transparent $(color);
+  }
+}
+
+/* 
+   Typography Related
+   ========================================================================== */
+
+// Convert the PSD's font point size to rems.
+@define-mixin ps-font-size ($fontSizePts: 12) {
+	// $ems: $fontSizePts/12 + 0em;
+	// font-size: $ems;
+
+	$fontSizePx: $fontSizePts + 0px;
+	font-size: $fontSizePx;
+}
+
+// Convert pixels to EM based on the default browser font-size of 16
+$browser-context: 16; // Default
+
+@function rem($pixels, $context: $browser-context) {
+	@return #{$pixels/$context}rem
+}
+
+/* Convert the PSDs leading to line-height*/
+@define-mixin ps-leading $fontSizePts: 12, $leadingPts: auto {
+
+	$fontSizePx: $(fontSizePts);
+	$leadingPx: $(leadingPts);
+	$lineHeightPx: resolve($fontSizePx + $leadingPx/2)px;
+
+	@if $(leadingPts) != auto {
+		line-height: $lineHeightPx;
+	}
+}
+
+// Convert the PSD's tracking to letter-spacing
+@define-mixin ps-tracking $tracking:0 {
+	$rems: resolve($(tracking) / 1000)em;
+	letter-spacing: $rems;
+}
+
+// Sets the font size, leading (line-height), and tracking (letter-spacing) in one go.
+@define-mixin font-size $fontSizePts: 12, $leadingPts: auto, $tracking:0 {
+	font-size: resolve($(fontSizePts)/16)rem;
+	@mixin ps-leading $(fontSizePts), $(leadingPts);
+	@mixin ps-tracking $(tracking);
+}

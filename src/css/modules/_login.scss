@@ -1,0 +1,68 @@
+.fd-login {
+	animation: fadeInLoginContainer .3s ease-in;
+	border-radius: 5px;
+	box-sizing: border-box;
+	background: $color-off-white;
+	box-shadow: 0 0 16px color($color-black a(10%));
+	display: none;
+	padding: 40px;
+	position: absolute;
+	text-align: center;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+	@mixin size 415px, auto;
+
+	* {
+		//animation: fadeInUp .2s ease-in;
+	}
+
+	img {
+		margin-bottom: 20px;
+	}
+
+	h1 {
+		color: $color-blue;
+		margin: 0;
+		text-transform: uppercase;
+		@mixin font-headingN7;
+		@mixin font-size 30, 0, 10;
+	}
+
+	p {
+		color: $color-blue;
+		margin-top: 40px;
+		@mixin font-sansN4;
+		@mixin font-size 14, 14, 10;
+	}
+
+	button {
+		background: $color-blue;
+		border-radius: 5px;
+		border: none;
+		box-shadow: none;
+		outline: none;
+		color: $color-off-white;
+		margin-top: 10px;
+		text-transform: uppercase;
+		transition: 0.3s ease-in-out;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		@mixin size 100%, 50px;
+		@mixin font-headingN7;
+		@mixin font-size 20, 0, 10;
+
+		&:active {
+			outline: none;
+		}
+
+		&:hover {
+			outline: none;
+			background: $color-blueDark;
+		}
+	}
+
+	.is-loggedin & {
+		animation: fadeOutLoginContainer .3s ease-out;
+		opacity: 0;
+	}
+}

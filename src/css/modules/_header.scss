@@ -1,0 +1,45 @@
+.fd-header {
+	align-items: center;
+	background: $color-headerBG;
+	box-sizing: border-box;
+	display: flex;
+	padding: 15px 0 15px 100px;
+	position: relative;
+	justify-content: flex-start;
+	@mixin size 100vw, 55px;
+
+	img, h1 {
+		align-items: center;
+		display: flex;
+		flex-direction: row;
+	}
+
+	img { max-height: 100%; }
+
+	h1 {
+		color: $color-off-white;
+		display: inline-block;
+		margin: 0 0 0 15px;
+		left: 10%;
+		@mixin font-sansN3;
+		@mixin font-size 18;
+	}
+
+	&--updated {
+		color: #9e9e9e;
+		position: absolute;
+		right: 20px;
+		top: 50%;
+		transform: translateY(-50%);
+		@mixin font-sansN3;
+		@mixin font-size 14;
+
+		span { @mixin font-sansN7; }
+	}
+	@media screen and (--wide) {
+		padding-left: 20px;
+	}
+	@media screen and (--mobile) {
+		h1 { display: none; }
+	}
+}

@@ -1,0 +1,42 @@
+{
+  "name": "FD-Tracker",
+  "version": "0.0.1",
+  "description": "FD Tracker project",
+  "main": "gruntfile.js",
+  "scripts": {
+    "start": "grunt watch"
+  },
+  "author": "Five & Done",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.6.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babelify": "^7.3.0",
+    "css-mqpacker": "^5.0.1",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-notify": "^0.4.5",
+    "grunt-postcss": "^0.8.0",
+    "load-grunt-config": "^0.19.2",
+    "postcss-conditionals": "^2.1.0",
+    "postcss-for": "^2.1.1",
+    "postcss-math": "0.0.5",
+    "postcss-nth-list": "^1.0.2",
+    "postcss-scss": "^0.4.0",
+    "precss": "^1.4.0",
+    "time-grunt": "^1.4.0"
+  },
+  "dependencies": {
+    "flux": "^3.1.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}

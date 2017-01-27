@@ -1,0 +1,48 @@
+$size: 200px;
+
+@keyframes x {
+  100% {
+    transform: translateX( calc(100vw - $size) );
+  }
+}
+
+@keyframes y {
+  100% {
+    transform: translateY( calc(100vh - $size) );
+  }
+}
+
+.fd {
+	&-screensaver {
+		background: #383838;
+		display: block;
+		position: absolute;
+		pointer-events: none;
+		opacity: 0;
+		top: 0; left: 0;
+		transition: opacity 0.3s ease-in-out;
+		z-index: -1;
+		@mixin size 100%, 100%;
+
+		&[data-active="false"] {
+			display: none;
+		}
+
+		&[data-active="true"][data-visible="true"] {
+			opacity: 1;
+			z-index: $zIndex-max--screensaver;
+		}
+
+		div,img {
+			@mixin size $size, $size;
+		}
+
+		.x {
+		  animation: x 13s linear infinite alternate;
+		}
+
+		.y {
+		  animation: y 7s linear infinite alternate;
+		}
+	}
+}

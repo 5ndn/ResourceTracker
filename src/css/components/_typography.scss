@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+$font-sans: 'Roboto', sans-serif;
+$font-heading: 'Montserrat', sans-serif;
+
+@define-mixin font-rendering{
+	//-webkit-backface-visibility: hidden;
+	-webkit-font-smoothing: antialiased;
+	//text-rendering: optimizeLegibility; Causing weird line break issues in Windows Chrome
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* 
+   Font Family Mixins
+   - (N = normal | I = italic | 4 = normal font-weight | 7 = bold font-weight)
+   ========================================================================== */
+@define-mixin font-sansN3 {
+  font-family: $font-sans;
+  font-weight: 300;
+  @mixin font-rendering;
+}
+@define-mixin font-sansN4 {
+  font-family: $font-sans;
+  font-weight: 400;
+  @mixin font-rendering;
+}
+@define-mixin font-sansN5 {
+  font-family: $font-sans;
+  font-weight: 500;
+  @mixin font-rendering;
+}
+@define-mixin font-sansN6 {
+  font-family: $font-sans;
+  font-weight: 600;
+  @mixin font-rendering;
+}
+@define-mixin font-sansN7 {
+  font-family: $font-sans;
+  font-weight: 700;
+  @mixin font-rendering;
+}
+@define-mixin font-sansN8 {
+  font-family: $font-sans;
+  font-weight: 800;
+  @mixin font-rendering;
+}
+
+@define-mixin font-headingN4 {
+  font-family: $font-heading;
+  font-weight: 400;
+  @mixin font-rendering;
+}
+@define-mixin font-headingN7 {
+  font-family: $font-heading;
+  font-weight: 700;
+  @mixin font-rendering;
+}

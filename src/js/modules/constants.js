@@ -1,0 +1,6 @@
+module.exports = {
+    GET_PROJECTS: 'GET_PROJECTS',
+    GET_DATES: 'GET_DATES',
+    GET_PEOPLE: 'GET_PEOPLE',
+    GET_PEOPLES_DATA: 'GET_PEOPLES_DATA',
+};

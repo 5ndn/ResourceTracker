@@ -1,0 +1,32 @@
+/* Partial Components */
+
+@import 'components/_normalize.scss';
+@import 'components/_colors.scss';
+@import 'components/_variables.scss';
+@import 'components/_media.scss';
+@import 'components/_typography.scss';
+@import 'components/_mixins.scss';
+@import 'components/_extendables.scss';
+@import 'components/_utilities.scss';
+@import 'components/_animations.scss';
+@import 'components/_zindex.scss';
+
+/* Partial Modules */
+
+@import 'modules/_login.scss';
+@import 'modules/_header.scss';
+@import 'modules/_projectList.scss';
+@import 'modules/_resourceTable.scss';
+@import 'modules/_screensaver.scss';
+
+html, body {
+	overflow: hidden;
+	@mixin size 100%, 100%;
+}
+
+body {
+	background: #e0e0e0;
+	transition: background 0.2s ease-in-out;
+	
+	&.is-loggedin { background: $color-off-white; }
+}
