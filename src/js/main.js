@@ -28,7 +28,7 @@ const APP = {
     gapi.auth.authorize({
       'client_id': config.CLIENT_ID,
       'scope': SCOPES.join(' '),
-      'immediate': immediate
+      'immediate': immediate,
     }, ::this.handleAuthResult );
   },
   handleAuthClick(e) {

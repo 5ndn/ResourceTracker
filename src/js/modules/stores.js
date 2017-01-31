@@ -9,6 +9,7 @@ var _config = {
 }
 
 var _state = {
+    hasAuthenticatedBefore: false,
     projects: [],
     dates: [],
     people: [],
@@ -33,7 +34,9 @@ function errorHandler(res, status, error) {
     console.error('Error: ', error);
     console.groupEnd();
 
-    reAuth();
+    if(_state.hasAuthenticatedBefore) {
+        reAuth();
+    }
 }
 
 function _getSettings() {
@@ -46,6 +49,8 @@ function _getSettings() {
         success: (res, status) => {
             const { values } = JSON.parse(res);
             let settings = [];
+
+            _state.hasAuthenticatedBefore = true;
 
             // Get App Settings
             /*

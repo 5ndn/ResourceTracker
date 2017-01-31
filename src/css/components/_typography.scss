@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url('http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+@import url('http://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 $font-sans: 'Roboto', sans-serif;
 $font-heading: 'Montserrat', sans-serif;
 
 @define-mixin font-rendering{
-	//-webkit-backface-visibility: hidden;
-	-webkit-font-smoothing: antialiased;
-	//text-rendering: optimizeLegibility; Causing weird line break issues in Windows Chrome
-	-moz-osx-font-smoothing: grayscale;
+  //-webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  //text-rendering: optimizeLegibility; Causing weird line break issues in Windows Chrome
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* 

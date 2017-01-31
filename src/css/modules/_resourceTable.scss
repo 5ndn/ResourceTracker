@@ -254,6 +254,7 @@
 			span {
 				font-size: 16px;
 				margin-left: 10px;
+				padding: 0;
 			}
 		}
 	}
@@ -268,7 +269,7 @@
 		&-date {
 			@mixin font-size 18, -16, -100;
 
-			&--current span { @mixin font-size 20, -16, -100; }
+			&--current span.date { @mixin font-size 20, -16, -100; }
 			.fd-resourceTable-daysOfWeek span { font-size: 12px; }
 		}
 	}
@@ -278,8 +279,11 @@
 		&-date { height: $table-date-height--small; }
 		&-employee {
 			span {
-				font-size: 14px;
+				font-size: 12px;
+				line-height: 22px;
 				margin-left: auto;
+				margin-top: 0;
+				padding: 0;
 			}
 		}
 		&-week div { @mixin font-size 12, 38, 25; }
@@ -301,6 +305,9 @@
 	    transform: rotate(180deg);
 	    writing-mode: vertical-lr;
 	    width: $table-row-offset--1-3;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 			
 			&--container {
 				height: 100%;
@@ -311,7 +318,7 @@
 	    span {
 	    	box-sizing: border-box;
 	    	line-height: 5px;
-	    	padding: 0 10px 0 15px;
+	    	padding: 0 10px;
 	    }
 		}
 
