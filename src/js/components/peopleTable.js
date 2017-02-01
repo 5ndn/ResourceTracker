@@ -32,8 +32,9 @@ class PeopleTable extends React.Component {
       dates.forEach((date, i) => {
         const isCurrentWeek = (i === 0) ? 'fd-resourceTable-date--current' : '';
         const classes = `fd-resourceTable-date fd-resourceTable-date--${i + 1} ${isCurrentWeek}`;
+        const key = `${date.day}-${i}`;
 
-        cols.push(<div key={date.day} className={classes}><span className="date">{date.month} / {date.day}</span> <div className="fd-resourceTable-daysOfWeek"><span className="Mon">M</span> <span className="Tue">T</span> <span className="Wed">W</span> <span className="Thu">T</span> <span className="Fri">F</span></div></div>);
+        cols.push(<div key={key} className={classes}><span className="date">{date.month} / {date.day}</span> <div className="fd-resourceTable-daysOfWeek"><span className="Mon">M</span> <span className="Tue">T</span> <span className="Wed">W</span> <span className="Thu">T</span> <span className="Fri">F</span></div></div>);
       });
     }
 
