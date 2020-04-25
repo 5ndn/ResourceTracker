@@ -42,7 +42,7 @@ function errorHandler(res, status, error) {
 function _getSettings() {
     var range = 'B:B';
 
-     $.ajax({
+    $.ajax({
         url: `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/settings!${range}?access_token=${_config.token}`,
         type: 'GET',
         dataType: 'text',
@@ -87,7 +87,7 @@ function _getSettings() {
 function _getProjects() {
     var range = 'A:A';
 
-     $.ajax({
+    $.ajax({
         url: `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.sheetId}!${range}?access_token=${_config.token}`,
         type: 'GET',
         dataType: 'text',
@@ -116,7 +116,7 @@ function _getProjects() {
 
             for (let i = 0; i < clientsData.length; i++) {
                 clientsList.push({
-                    name: clientsData[i][0], 
+                    name: clientsData[i][0],
                     color: '#' + clientsData[i][1]
                 });
             }
@@ -146,10 +146,10 @@ function _getDates() {
             const resParsed = JSON.parse(res);
             const today = new Date();
             const dd = (today.getDate() < 10) ? `0${today.getDate()}` : today.getDate();
-            const mm = (today.getMonth()+1 < 10) ? `0${today.getMonth()+1}` : today.getMonth()+1;
+            const mm = (today.getMonth() + 1 < 10) ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
             const yyyy = today.getFullYear();
             const weekday = new Array(7);
-            weekday[0] =  "Sun";
+            weekday[0] = "Sun";
             weekday[1] = "Mon";
             weekday[2] = "Tue";
             weekday[3] = "Wed";
@@ -209,7 +209,10 @@ function _parseProjects(data) {
     // Skip first Row
     for (var i = 1; i <= data.valueRanges.length - 1; i++) {
         // Every 2 rows = 1 person's full day
+        // data.valueRanges[i];
         data.valueRanges[i];
+        if (data.valueRanges[i].values == undefined) continue;
+
         var personHalfDayArray = [],
             multiDayProject = false,
             projectName = '',
@@ -222,41 +225,43 @@ function _parseProjects(data) {
         // Start at second position to skip project column and merged cell
         for (var d = weekToStart; d <= parseInt(weekToStart + 30); d++) {
             // Check for a project name
-            if(data.valueRanges[i].values[0][d].length >= 1) {
+            //when we see on weekend its breaking so adding check
+            if(data.valueRanges[i] == undefined || data.valueRanges[i].values[0] == undefined || data.valueRanges[i].values[0][d] == undefined) continue;
+            if (data.valueRanges[i].values[0][d].length >= 1) {
                 // End current project tracking and start a new one when the next projec tname appears
                 //if(data.valueRanges[i].values[0][d] != projectName) {
-                    if (projectName.length > 0) {
-                        if(projectName.indexOf('-') > -1) {
-                            let projectArr = projectName.split('-');
+                if (projectName.length > 0) {
+                    if (projectName.indexOf('-') > -1) {
+                        let projectArr = projectName.split('-');
 
-                            var projectColor = _checkProjectColor(projectArr[0]),
-                                id = personName + projectArr[0] + projectLength + d;
-                            personHalfDayArray.push({name: projectArr[0], duration: projectLength, color: projectColor, id: id, delivery: true});
-                        }
-                        else {
-                            var projectColor = _checkProjectColor(projectName),
-                                id = personName + projectName + projectLength + d;
-                            personHalfDayArray.push({name: projectName, duration: projectLength, color: projectColor, id: id, });
-                            prevProjectName = projectName;
-                        }
+                        var projectColor = _checkProjectColor(projectArr[0]),
+                            id = personName + projectArr[0] + projectLength + d;
+                        personHalfDayArray.push({ name: projectArr[0], duration: projectLength, color: projectColor, id: id, delivery: true });
                     }
-                    // If project length is > 5 (length of a week)
-                    multiDayProject = true;
-                    projectName = data.valueRanges[i].values[0][d];
-                    projectLength = 1; // Resets project length to initial start of 1
+                    else {
+                        var projectColor = _checkProjectColor(projectName),
+                            id = personName + projectName + projectLength + d;
+                        personHalfDayArray.push({ name: projectName, duration: projectLength, color: projectColor, id: id, });
+                        prevProjectName = projectName;
+                    }
+                }
+                // If project length is > 5 (length of a week)
+                multiDayProject = true;
+                projectName = data.valueRanges[i].values[0][d];
+                projectLength = 1; // Resets project length to initial start of 1
                 //}
             }
             // Add to project duration if the next cell in the spreadsheet is empty
-            else if(data.valueRanges[i].values[0][d].length <= 1 && multiDayProject == true) {
+            else if (data.valueRanges[i].values[0][d].length <= 1 && multiDayProject == true) {
                 projectLength++;
             }
-            
+
         }
 
         // Even
-        if(i % 2 == 0) {
+        if (i % 2 == 0) {
             // Push both morning and afternoon times
-            reformattedDataArray.push({employee: personName, top: personHalfDaySavedArray, bottom: personHalfDayArray});
+            reformattedDataArray.push({ employee: personName, top: personHalfDaySavedArray, bottom: personHalfDayArray });
         }
         // Odd, assign day to person
         else {
@@ -271,9 +276,9 @@ function _parseProjects(data) {
 // Return project's color
 function _checkProjectColor(project) {
     for (var i = 0; i < _state.projects.length; i++) {
-       if(_state.projects[i].name == project) {
-        return _state.projects[i].color;
-       }
+        if (_state.projects[i].name == project) {
+            return _state.projects[i].color;
+        }
     }
 }
 
@@ -295,11 +300,11 @@ function _parseProjectsByWeek(data) {
 
         for (var d = 0; d < data[i].top.length; d++) {
 
-            if(weekMaxDuration - currentWeekTimeTop - data[i].top[d].duration >= 0) {
+            if (weekMaxDuration - currentWeekTimeTop - data[i].top[d].duration >= 0) {
                 currentWeekTimeTop += data[i].top[d].duration;
                 weekResourcesTop.push(data[i].top[d]);
             }
-            if(weekMaxDuration - currentWeekTimeTop == 0) {
+            if (weekMaxDuration - currentWeekTimeTop == 0) {
                 //fullResourcesTop.push(weekResourcesTop);
                 fullResources.push(weekResourcesTop)
                 weekResourcesTop = [];
@@ -308,11 +313,11 @@ function _parseProjectsByWeek(data) {
         }
 
         for (var a = 0; a < data[i].bottom.length; a++) {
-            if(weekMaxDuration - currentWeekTimeBottom - data[i].bottom[a].duration >= 0) {
+            if (weekMaxDuration - currentWeekTimeBottom - data[i].bottom[a].duration >= 0) {
                 currentWeekTimeBottom += data[i].bottom[a].duration;
                 weekResourcesBottom.push(data[i].bottom[a]);
             }
-            if(weekMaxDuration - currentWeekTimeBottom == 0) {
+            if (weekMaxDuration - currentWeekTimeBottom == 0) {
                 fullResourcesBottom.push(weekResourcesBottom);
                 weekResourcesBottom = [];
                 currentWeekTimeBottom = 0;
@@ -320,7 +325,7 @@ function _parseProjectsByWeek(data) {
         }
 
         for (var c = 0; c < fullResources.length; c++) {
-            
+
             if (undefined !== fullResourcesBottom[c] && fullResourcesBottom[c].length) {
                 for (var b = 0; b < fullResourcesBottom[c].length; b++) {
                     fullResources[c].push(fullResourcesBottom[c][b]);
@@ -328,7 +333,7 @@ function _parseProjectsByWeek(data) {
             }
         }
 
-        formattedByWeek.push({employee: data[i].employee, weeklyBreakdown: fullResources});
+        formattedByWeek.push({ employee: data[i].employee, weeklyBreakdown: fullResources });
         //formattedByWeek.push({employee: data[i].employee, weeklyBreakdownTop: fullResourcesTop, weeklyBreakdownBottom: fullResourcesBottom});
     }
 
@@ -364,68 +369,68 @@ function _reloadTracker() {
 }
 
 var SettingsStore = $.extend({}, EventEmitter.prototype, {
-    getState: function() {
+    getState: function () {
         return _state;
     },
-    emitChange: function() {
+    emitChange: function () {
         this.emit('change');
     },
-    addChangeListener: function(callback) {
+    addChangeListener: function (callback) {
         this.on('change', callback);
     },
-    removeChangeListener: function(callback) {
+    removeChangeListener: function (callback) {
         this.removeListener('change', callback);
     }
 });
 
 var TrackerStore = $.extend({}, EventEmitter.prototype, {
-    getState: function() {
+    getState: function () {
         return _state;
     },
-    emitChange: function() {
+    emitChange: function () {
         this.emit('change');
     },
-    addChangeListener: function(callback) {
+    addChangeListener: function (callback) {
         this.on('change', callback);
     },
-    removeChangeListener: function(callback) {
+    removeChangeListener: function (callback) {
         this.removeListener('change', callback);
     }
 });
 
 var DateStore = $.extend({}, EventEmitter.prototype, {
-    getState: function() {
+    getState: function () {
         return _state;
     },
-    emitChange: function() {
+    emitChange: function () {
         this.emit('change');
     },
-    addChangeListener: function(callback) {
+    addChangeListener: function (callback) {
         this.on('change', callback);
     },
-    removeChangeListener: function(callback) {
+    removeChangeListener: function (callback) {
         this.removeListener('change', callback);
     }
 });
 
-AppDispatcher.register(function(action) {
-    switch(action.actionType) {
+AppDispatcher.register(function (action) {
+    switch (action.actionType) {
         case TrackerConstants.GET_PROJECTS:
             _getProjects();
             _getDates();
-        break;
+            break;
         case TrackerConstants.GET_DATES:
             _getDates();
-        break;
+            break;
         case TrackerConstants.GET_PEOPLE:
             _getPeople();
-        break;
+            break;
         case TrackerConstants.GET_PEOPLES_DATA:
             _getPeoplesData();
-        break;
+            break;
         case TrackerConstants.GET_SETTINGS:
             _getSettings();
-        break;
+            break;
     }
     return true;
 });

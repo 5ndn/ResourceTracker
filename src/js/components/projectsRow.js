@@ -10,10 +10,10 @@ class ProjectsRow extends React.Component {
   }
 
   componentDidMount() {
-    TrackerStore.on('change', ::this._projectsChanged);
+    TrackerStore.on('change', :: this._projectsChanged);
   }
   componentWillUnmount() {
-    TrackerStore.off('change', ::this._projectsChanged);
+    TrackerStore.off('change', :: this._projectsChanged);
   }
   // only update if a client is added/changed
   shouldComponentUpdate(nextProps, nextState) {
@@ -21,7 +21,7 @@ class ProjectsRow extends React.Component {
 
     return updatedState;
   }
-  _projectsChanged() { 
+  _projectsChanged() {
     this.setState({
       clients: TrackerStore.getState().clients
     });
@@ -37,13 +37,24 @@ class ProjectsRow extends React.Component {
           background: client.color
         };
 
-        rows.push(<li key={i}><i className="fd-projectList--color" style={iStyle}></i><span className="fd-projectList--name">{client.name}</span></li>);
+        rows.push(
+          <li key={i}>
+            <div style={{ display: "inline-block" }}>
+              <i className="fd-projectList--color" style={iStyle}></i>
+              <div className="fd-projectList--name">
+                {client.name}
+              </div>
+            </div>
+          </li>
+        );
       });
     }
 
     return (
-      <div className="fd-projectList">
-        <ul className="fd-projectList-container" ref="projectListContainer">{rows}</ul>
+      <div className="fd-projectList" style={{ width: "80%" }}>
+        <ul className="fd-projectList-container" ref="projectListContainer" style={{ display: "inline-block" }}>
+          {rows}
+        </ul>
       </div>
     );
   }

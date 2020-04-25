@@ -1,333 +1,497 @@
 // Resource Table Styles
 .fd-resourceTable {
-	width: 100%;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: gray;
 
-	&-head {
-		align-items: center;
-		background: $color-tableHeadBG;
-		display: flex;
-		flex: 1;
-		flex-direction: row;
-		padding-left: $table-row-offset--1-6;
-		justify-content: flex-start;
-	}
+  &-head {
+    align-items: center;
+    background: $color-tableHeadBG;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    padding-left: $table-row-offset--1-2;
+    justify-content: flex-start;
+  }
 
-	&-date {
-		align-items: flex-start;
-		border-left: 1px solid #272727;
-		box-sizing: border-box;
-		color: #acacac;
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-		height: $table-date-height--large;
-		padding: 0 15px;
-		position: relative;
-		justify-content: flex-end;
-		width: $table-col-width--1-6;
-		@mixin font-size 22, -16, -100;
-		line-height: 29px;
-		@mixin font-sansN4;
+  &-open_percent {
+    font-size: 10px;
+    color: #c2c2c2;
+    min-width: 100px !important;
+    text-align: center;
+  }
 
-		[data-showdayofweeklabels="false"] & {
-			justify-content: center;
-		}
+  &-date {
+    align-items: flex-start;
+    border-left: 1px solid #272727;
+    box-sizing: border-box;
+    color: #acacac;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: $table-date-height--large;
+    padding: 0 15px;
+    position: relative;
+    justify-content: flex-end;
+    // width: $table-col-width--1-6;
+    min-width: 300px !important;
+    @mixin font-size 22, -16, -100;
+    line-height: 29px;
+    @mixin font-sansN4;
 
-		&--current {
-			border-left-color: transparent;
+    [data-showdayofweeklabels="false"] & {
+      justify-content: center;
+    }
 
-			span.date {
-				color: $color-white;
-				position: relative;
-				top: -5px;
-				@mixin font-size 32, -16, -100;
-			}
-			.fd-resourceTable-daysOfWeek span { color: #7d7d7d; }
-		}
-		span {
-			box-sizing: border-box;
-			display: block;
-			padding-left: 5%;
-			width: 100%;
-			@mixin font-sansN5;
-		}
-	}
+    &--current {
+      border-left-color: transparent;
 
-	&-daysOfWeek {
-		display: flex;
-		margin-top: 3px;
-		@mixin size 100%, auto;
+      span.date {
+        color: $color-white;
+        position: relative;
+        top: -5px;
+        @mixin font-size 32, -16, -100;
+      }
+      .fd-resourceTable-daysOfWeek span {
+        color: #7d7d7d;
+      }
+    }
+    span {
+      box-sizing: border-box;
+      display: block;
+      padding-left: 5%;
+      width: 100%;
+      @mixin font-sansN5;
+    }
+  }
 
-		[data-showdayofweeklabels="false"] & {
-			display: none;
-		}
+  &-daysOfWeek {
+    display: flex;
+    margin-top: 3px;
+    @mixin size 100%, auto;
 
-		span {
-			box-sizing: border-box;
-			color: #9e9e9e;
-			display: block;
-			padding: 10px 0;
-			position: relative;
-			text-align: center;
-			flex: 1;
-			flex-basis: 20%;
-			width: 20%;
-			@mixin font-size 12, 0;
+    [data-showdayofweeklabels="false"] & {
+      display: none;
+    }
 
-			&:before {
-				@extend %pseudoElementAbsolute;
-				background: #4e4e4e;
-				top: 5px; bottom: 5px;
-				width: 1px;
-			}
-			&:first-child:before { display: none; }
-		}
-	}
-	
-	&-rowsWrap { height: $table-rowWrap-height--large; }
-	&-row {
-		background: #eeedec;
-		border-bottom: 1px solid $color-tableBorder;
-		display: flex;
-		flex-direction: row;
-		flex: 1;
-		align-items: center;
-		justify-content: flex-start;
-		position: relative;
-		@mixin size 100%, $table-row-height;
+    span {
+      box-sizing: border-box;
+      color: #9e9e9e;
+      display: block;
+      padding: 10px 0;
+      position: relative;
+      text-align: center;
+      flex: 1;
+      flex-basis: 20%;
+      width: 20%;
+      @mixin font-size 12, 0;
 
-		&:nth-child(even) { background: #f5f5f5; }
-	}
+      &:before {
+        @extend %pseudoElementAbsolute;
+        background: #4e4e4e;
+        top: 5px;
+        bottom: 5px;
+        width: 1px;
+      }
+      &:first-child:before {
+        display: none;
+      }
+    }
+  }
 
-	&-employee {
-		border-right: 1px solid transparent; // meant to try and keep things aligned
-		flex-basis: auto;
-		min-width: $table-row-offset--1-6;
-		max-width: $table-row-offset--1-6;
-		position: relative;
-		width: $table-row-offset--1-6;
+  &-rowsWrap {
+    height: $table-rowWrap-height--large;
+  }
+  &-row {
+    background: #eeedec;
+    border-bottom: 1px solid $color-tableBorder;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    height: 60px !important;
+    @mixin size 100%, $table-row-height;
 
-		i, span {
-			display: block;
-			margin: 0 auto;
-		}
+    &:nth-child(even) {
+      background: #f5f5f5;
+    }
+  }
 
-		i {
-			background-size: cover !important;
-			border-radius: 50%;
-			@mixin size 50px, 50px;
-		}
+  &-employee {
+    border-right: 1px solid transparent; // meant to try and keep things aligned
+    flex-basis: auto;
+    min-width: $table-row-offset--1-6;
+    max-width: $table-row-offset--1-6;
+    position: relative;
+    width: $table-row-offset--1-6;
 
-		span {
-			color: $color-grey-60;
-			margin-top: 5px;
-			text-align: center;
-			@mixin font-sansN4;
-			@mixin font-size 16, 18, 25;
-			line-height: 15px;
-		}
+    i,
+    span {
+      display: block;
+      margin: 0 auto;
+    }
 
-		&--container {
-			position: absolute;
-			top: 50%; left: 50%;
-			transform: translate(-50%, -50%);
-			width: 100%;
-		}
-	}
+    i {
+      background-size: cover !important;
+      border-radius: 50%;
+      margin-top: -3px;
+      @mixin size 35px, 35px;
+    }
 
-	&-week {
-		align-content: center;
-		border-right: 1px solid #dcdcdc;
-		box-sizing: border-box;
-		display: flex;
-		flex: 1;
-		flex-direction: row;
-		flex-wrap: wrap;
-		padding: 0 15px;
-		position: relative;
-		@mixin size $table-col-width--1-6, 100%;
+    span {
+      color: $color-grey-60;
+      margin-top: 5px;
+      text-align: center;
+      @mixin font-sansN4;
+      @mixin font-size 16, 18, 25;
+      line-height: 15px;
+    }
 
-		&:nth-child(2) {
-			margin-left: 0;
+    &--container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+    }
+  }
 
-			&:before {
-				@extend %pseudoElementAbsolute;
-				background: $color-white;
-				border-left: 1px solid #dfdedd;
-				border-right: 1px solid #dfdedd;
-				box-sizing: border-box;
-				margin-left: -1px;
-				position: absolute;
-				top: 0; left: 0;
-				@mixin size calc(20% - 4px), 100%;
-			}
+  &-week {
+    align-content: center;
+    border-right: 1px solid #dcdcdc;
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 15px;
+    position: relative;
+    width: 300px !important;
+    @mixin size $table-col-width--1-6, 100%;
 
-			[data-highlightdayofweek="false"] & {          
-				&:before {
-					display: none;
-				}
-			}
-		}
+    &:nth-child(2) {
+      margin-left: 0;
 
-		div {
-			background: #ff0000;
-			border-radius: 10px;
-			box-shadow: color($color-black a(10%)) 0 1px 2px;
-			color: $color-white;
-			height: 35%;
-			margin: 2px;
-			float: left;
-			text-align: left;
-			position: relative;
-			overflow: hidden;
-			@mixin font-sansN6;
-			@mixin font-size 14, 38, 25;
+      &:before {
+        @extend %pseudoElementAbsolute;
+        background: $color-white;
+        border-left: 1px solid #dfdedd;
+        border-right: 1px solid #dfdedd;
+        box-sizing: border-box;
+        margin-left: -1px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @mixin size calc(20% - 4px), 100%;
+      }
 
-			span {
-				margin-left: 10px;
-				position: absolute;
-				top: 50%;
-				transform: translateY(-50%);
-			}
-		}
+      [data-highlightdayofweek="false"] & {
+        &:before {
+          display: none;
+        }
+      }
+    }
 
-		[data-delivery="true"] { box-shadow: inset 0 0 0 2px #ff0000; }
+    div {
+      background: #ff0000;
+      border-radius: 10px;
+      box-shadow: color($color-black a(10%)) 0 1px 2px;
+      color: $color-white;
+      height: 35%;
+      margin: 2px;
+      float: left;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      @mixin font-sansN6;
+      @mixin font-size 14, 38, 25;
 
-		// Override White color for cells with white backgrounds
-		.span-1 {
-			width: calc(20% - 4px);
+      span {
+        margin-left: 12px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
 
-			span {
-				margin-left: 0;
-				left: 50%;
-				transform: translate(-50%, -50%);
-			}
-		}
-		.span-2 { width: calc(40% - 4px); }
-		.span-3 { width: calc(60% - 4px); }
-		.span-4 { width: calc(80% - 4px); }
-		.span-5 { width: calc(100% - 4px); }
-	}
+    [data-delivery="true"] {
+      box-shadow: inset 0 0 0 2px #ff0000;
+    }
 
-	&[data-day="Mon"] { @mixin activeDay .Mon; }
-	&[data-day="Tue"] { @mixin activeDay .Tue; }
-	&[data-day="Wed"] { @mixin activeDay .Wed; }
-	&[data-day="Thu"] { @mixin activeDay .Thu; }
-	&[data-day="Fri"] { @mixin activeDay .Fri; }
+    // Override White color for cells with white backgrounds
+    .span-1 {
+      width: calc(20% - 4px);
 
-	&-day {
-		display: flex;
-		flex-direction: column;
-		margin: 0 1% 0 0;
-		height: 6vh;
-		width: calc(100vw / 34);
+      span {
+        margin-left: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .span-2 {
+      width: calc(40% - 4px);
+    }
+    .span-3 {
+      width: calc(60% - 4px);
+    }
+    .span-4 {
+      width: calc(80% - 4px);
+    }
+    .span-5 {
+      width: calc(100% - 4px);
+    }
+  }
 
-		&:last-child { margin-right: 0; }
+  &[data-day="Mon"] {
+    @mixin activeDay .Mon;
+  }
+  &[data-day="Tue"] {
+    @mixin activeDay .Tue;
+  }
+  &[data-day="Wed"] {
+    @mixin activeDay .Wed;
+  }
+  &[data-day="Thu"] {
+    @mixin activeDay .Thu;
+  }
+  &[data-day="Fri"] {
+    @mixin activeDay .Fri;
+  }
 
-		div {
-			background: #ff0000;
-			border-radius: 3px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			clear: both;
-			text-align: center;
-			@mixin size 100%, 100%;
-		}
+  &-day {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1% 0 0;
+    height: 6vh;
+    width: calc(100vw / 34);
 
-		&--split {
-			display: block;
-			height: auto;
-			margin-bottom: 2%;
+    &:last-child {
+      margin-right: 0;
+    }
 
-			&:last-child {
-				margin-top: 2%;
-				margin-bottom: 0;
-			}
-		}
-	}
+    div {
+      background: #ff0000;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      clear: both;
+      text-align: center;
+      @mixin size 100%, 100%;
+    }
 
-	// Vertical Breakpoints
-	@media screen and (--tallest) {
-		&-date {}
-		&-employee {
-			span {
-				font-size: 16px;
-				margin-left: 10px;
-				padding: 0;
-			}
-		}
-	}
+    &--split {
+      display: block;
+      height: auto;
+      margin-bottom: 2%;
 
-	@media screen and (--tall) {
-		&-employee {
-			i { display: none; }
-		}
-	}
+      &:last-child {
+        margin-top: 2%;
+        margin-bottom: 0;
+      }
+    }
+  }
 
-	@media screen and (--medium) {
-		&-date {
-			@mixin font-size 18, -16, -100;
+  // Vertical Breakpoints
+  @media screen and (--tallest) {
+    &-date {
+    }
+    &-employee {
+      span {
+        font-size: 12px;
+        margin-left: 10px;
+        padding: 0;
+      }
+    }
+  }
 
-			&--current span.date { @mixin font-size 20, -16, -100; }
-			.fd-resourceTable-daysOfWeek span { font-size: 12px; }
-		}
-	}
+  @media screen and (--tall) {
+    &-employee {
+      i {
+        display: block;
+      }
+    }
+  }
 
-	@media screen and (--small) {
-		&-rowsWrap { height: $table-rowWrap-height--small; }
-		&-date { height: $table-date-height--small; }
-		&-employee {
-			span {
-				font-size: 12px;
-				line-height: 1;
-				// margin-left: auto;
-				margin-top: 0;
-				padding: 0;
-			}
-		}
-		&-week div { @mixin font-size 12, 38, 25; }
-	}
+  @media screen and (--medium) {
+    &-date {
+      @mixin font-size 18, -16, -100;
 
-	// Hiding cols
-	@media screen and (--maxWidth) {
-		&-date, &-week { @mixin hideEndWeeks 1; }
-	}
-	@media screen and (--widest) {
-		&-date, &-week { @mixin hideEndWeeks 2; }
-	}
-	@media screen and (--wide) {
-		&-head { padding-left: $table-row-offset--1-3; }
-		&-employee {
-			height: 100%;
-			min-width: $table-row-offset--1-3;
-			max-width: $table-row-offset--1-3;
-	    transform: rotate(180deg);
-	    writing-mode: vertical-lr;
-	    width: $table-row-offset--1-3;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-			
-			&--container {
-				height: 100%;
-				top: 0;
-				transform: translate(-50%, 0);
-			}
-	    i { display: none; }
-	    span {
-	    	box-sizing: border-box;
-	    	line-height: 5px;
-	    	padding: 0 10px;
-	    }
-		}
+      &--current span.date {
+        @mixin font-size 20, -16, -100;
+      }
+      .fd-resourceTable-daysOfWeek span {
+        font-size: 12px;
+      }
+    }
+  }
 
-		&-date, &-week { @mixin hideEndWeeks 3; }
-	}
-	@media screen and (--mid) {
-		&-date, &-week { @mixin hideEndWeeks 4; }
-	}
-	@media screen and (--mobile) {
-		&-date, &-week { @mixin hideEndWeeks 5; }
-	}
+  @media screen and (--small) {
+    &-rowsWrap {
+      // height: $table-rowWrap-height--small;
+    }
+    &-date {
+      height: $table-date-height--small;
+    }
+    &-employee {
+      span {
+        font-size: 10px;
+        line-height: 1;
+        margin-top: 0;
+        padding: 0;
+      }
+    }
+    &-week div {
+      @mixin font-size 12, 38, 25;
+    }
+  }
+
+  // Hiding cols
+  // @media screen and (--maxWidth) {
+  //   &-date,
+  //   &-week {
+  //     @mixin hideEndWeeks 1;
+  //   }
+  // }
+  // @media screen and (--widest) {
+  //   &-date,
+  //   &-week {
+  //     @mixin hideEndWeeks 2;
+  //   }
+  // }
+  // @media screen and (--wide) {
+  //   &-head {
+  //     padding-left: $table-row-offset--1-3;
+  //   }
+  //   &-open_percent {
+  //     display: none;
+  //   }
+  //   &-employee {
+  //     height: 100%;
+  //     min-width: $table-row-offset--1-3;
+  //     max-width: $table-row-offset--1-3;
+  //     transform: rotate(180deg);
+  //     writing-mode: vertical-lr;
+  //     width: $table-row-offset--1-3;
+  //     white-space: nowrap;
+  //     overflow: hidden;
+  //     text-overflow: ellipsis;
+
+  //     &--container {
+  //       height: 100%;
+  //       top: 0;
+  //       transform: translate(-50%, 0);
+  //     }
+  //     i {
+  //       display: none;
+  //     }
+  //     span {
+  //       box-sizing: border-box;
+  //       line-height: 5px;
+  //       padding: 0 10px;
+  //     }
+  //   }
+
+  //   &-date,
+  //   &-week {
+  //     @mixin hideEndWeeks 3;
+  //   }
+  // }
+  // @media screen and (--mid) {
+  //   &-date,
+  //   &-week {
+  //     @mixin hideEndWeeks 4;
+  //   }
+  // }
+  // @media screen and (--mobile) {
+  //   &-date,
+  //   &-week {
+  //     @mixin hideEndWeeks 5;
+  //   }
+  // }
+}
+
+.fd-resourceTable-rowsWrap::-webkit-scrollbar {
+  width: 5px;
+  height: 20px;
+}
+
+.fd-resourceTable-rowsWrap::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.fd-resourceTable-rowsWrap::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 50px;
+  height: 30px;
+}
+
+.emp-name {
+  font-weight: 8px !important;
+  width: 85px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pie {
+  background-color: #f09628;
+  color: #d02b2b; // text color inside circle
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  margin-left: 25px;
+  margin-top: 3px;
+  margin-bottom: 2px;
+}
+.pie > div {
+  float: left;
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.pie span {
+  background-color: #d02b2b;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pie .left span {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  -webkit-transform-origin: 100% 50%;
+}
+.pie .right span {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -webkit-transform-origin: 0% 50%;
+}
+.pie:before,
+.pie:after {
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+}
+.pie:before {
+  background-color: #fff;
+  content: "";
+  width: 75%;
+  height: 75%;
+  z-index: 100;
+}
+.pie:after {
+  content: attr(data-percent) "%";
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 200;
+  text-align: center;
 }

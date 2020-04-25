@@ -23,7 +23,9 @@ class WeeksRow extends React.Component {
         <div className="fd-resourceTable-employee">
           <div className="fd-resourceTable-employee--container">
             <i style={style}></i>
-            <span>{this.props.people.employee}</span>
+            <span style={{ color: "#000000" }} className="emp-name">
+              {this.props.people.employee}
+            </span>
           </div>
         </div>
         {cols}
