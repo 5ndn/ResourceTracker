@@ -3,7 +3,11 @@ import Tracker from './containers/tracker';
 
 const APP = {
   init() {
-    this.loadGoogleAPIs();
+    //Added timeout for better loading, sometimes on first load color was not reflected so delaying might help
+    setTimeout(() => {
+      this.loadGoogleAPIs(); 
+    }, 2000);
+    
   },
 
   bootstrap() {
